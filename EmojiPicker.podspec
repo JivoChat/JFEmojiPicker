@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.description = <<-DESC
 Emoji picker written on Swift 4.2 by levantAJ
                        DESC
-  s.homepage = 'https://github.com/levantAJ/EmojiPicker'
+  s.homepage = 'https://github.com/JivoChat/EmojiPicker'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.author = { 'Tai Le' => 'sirlevantai@gmail.com' }
   s.source = { :git => 'https://github.com/levantAJ/EmojiPicker.git', :tag => s.version.to_s }
