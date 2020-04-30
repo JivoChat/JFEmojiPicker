@@ -32,11 +32,10 @@ final class EmojiPopoverViewController: UIViewController {
             popoverPresentationController?.permittedArrowDirections = permittedArrowDirections
         }
     }
-    var emojiFontSize: CGFloat = 29 {
-        didSet {
-            emojisCollectionView?.reloadData()
-        }
-    }
+    
+    var emojiBoxSize = CGSize(width: 60, height: 60)
+    var emojiFontSize = CGFloat(29)
+    
     var backgroundColor: UIColor? = UIColor.white.withAlphaComponent(0.5) {
         didSet {
             changeDarkModeStyle()
@@ -119,13 +118,7 @@ extension EmojiPopoverViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == emojisCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constant.EmojiCollectionViewCell.identifier, for: indexPath) as! EmojiCollectionViewCell
-            cell.delegate = self
-            cell.emojiFontSize = emojiFontSize
-            if let emoji = viewModel.emoji(at: indexPath) {
-                cell.emoji = emoji
-            }
-            return cell
+            return collectionView.dequeueReusableCell(withReuseIdentifier: Constant.EmojiCollectionViewCell.identifier, for: indexPath) as! EmojiCollectionViewCell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constant.GroupCollectionViewCell.identifier, for: indexPath) as! GroupCollectionViewCell
@@ -141,6 +134,16 @@ extension EmojiPopoverViewController: UICollectionViewDataSource {
         }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? EmojiCollectionViewCell {
+            cell.delegate = self
+            cell.emojiFontSize = emojiFontSize
+            if let emoji = viewModel.emoji(at: indexPath) {
+                cell.emoji = emoji
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -148,7 +151,7 @@ extension EmojiPopoverViewController: UICollectionViewDataSource {
 extension EmojiPopoverViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == emojisCollectionView {
-            return Constant.EmojiCollectionViewCell.size
+            return emojiBoxSize
         }
         return CGSize(width: max(collectionView.frame.width/CGFloat(viewModel.numberOfSections), 32), height: collectionView.frame.height)
     }
