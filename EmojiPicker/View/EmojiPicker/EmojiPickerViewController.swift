@@ -16,6 +16,7 @@ open class EmojiPickerViewController: UIViewController {
     open var sourceRect: CGRect = .zero
     open var permittedArrowDirections: UIPopoverArrowDirection = .any
     open var emojiFontSize: CGFloat = 29
+    open var emojiBoxSize = CGSize(width: 60, height: 60)
     open var backgroundColor: UIColor? = UIColor.white.withAlphaComponent(0.5)
     open var darkModeBackgroundColor: UIColor? = UIColor.black.withAlphaComponent(0.5)
     open var isDarkMode = false
@@ -37,6 +38,7 @@ open class EmojiPickerViewController: UIViewController {
         emojiPopoverVC.isDarkMode = isDarkMode
         emojiPopoverVC.language = language
         emojiPopoverVC.emojiFontSize = emojiFontSize
+        emojiPopoverVC.emojiBoxSize = emojiBoxSize
         emojiPopoverVC.dismissAfterSelected = dismissAfterSelected
         emojiPopoverVC.darkModeBackgroundColor = darkModeBackgroundColor
         emojiPopoverVC.backgroundColor = backgroundColor
@@ -55,19 +57,19 @@ extension EmojiPickerViewController: EmojiPopoverViewControllerDelegate {
     }
     
     func emojiPickerViewController(_ controller: EmojiPopoverViewController, brief emoji: Emoji, sourceView: UIView) {
-        let sourceRect = sourceView.convert(sourceView.bounds, to: view)
-        emojiPreviewer.brief(sourceView: view.window!, sourceRect: sourceRect, emoji: emoji, emojiFontSize: emojiFontSize, isDarkMode: isDarkMode)
+//        let sourceRect = sourceView.convert(sourceView.bounds, to: view)
+//        emojiPreviewer.brief(sourceView: view.window!, sourceRect: sourceRect, emoji: emoji, emojiFontSize: emojiFontSize, isDarkMode: isDarkMode)
     }
     
     func emojiPickerViewController(_ controller: EmojiPopoverViewController, preview emoji: Emoji, sourceView: UIView) {
-        let sourceRect = sourceView.convert(sourceView.bounds, to: view)
-        emojiPreviewer.preview(sourceView: view.window!, sourceRect: sourceRect, emoji: emoji, emojiFontSize: emojiFontSize, isDarkMode: isDarkMode) { [weak self] selectedEmoji in
-            guard let strongSelf = self else { return }
-            var emoji = emoji
-            emoji.selectedEmoji = selectedEmoji
-            strongSelf.emojiPopoverVC.select(emoji: emoji)
-            strongSelf.delegate?.emojiPickerViewController(strongSelf, didSelect: selectedEmoji)
-        }
+//        let sourceRect = sourceView.convert(sourceView.bounds, to: view)
+//        emojiPreviewer.preview(sourceView: view.window!, sourceRect: sourceRect, emoji: emoji, emojiFontSize: emojiFontSize, isDarkMode: isDarkMode) { [weak self] selectedEmoji in
+//            guard let strongSelf = self else { return }
+//            var emoji = emoji
+//            emoji.selectedEmoji = selectedEmoji
+//            strongSelf.emojiPopoverVC.select(emoji: emoji)
+//            strongSelf.delegate?.emojiPickerViewController(strongSelf, didSelect: selectedEmoji)
+//        }
     }
 
     func emojiPickerViewControllerHideDeselectEmoji(_ controller: EmojiPopoverViewController) {
