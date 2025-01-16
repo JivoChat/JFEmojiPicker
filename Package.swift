@@ -20,7 +20,7 @@ let package = Package(
                 .copy("Resource/emojis.json"),
                 .copy("Resource/emojis9.1.json"),
                 .copy("Resource/emojis11.0.1.json"),
-            ])
+            ]
         )
     ]
 )
