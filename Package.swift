@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "JFEmojiPicker",
+    defaultLocalization: "en",
     platforms: [.iOS(.v13)],
     products: [
         .library(
@@ -14,12 +15,13 @@ let package = Package(
     targets: [
         .target(
             name: "JFEmojiPicker",
-            path: ".",
+            path: "EmojiPicker",
+            exclude: ["Info.plist"],
             resources: [
-                .process("Resource/Assets.xcassets"),
-                .copy("Resource/emojis.json"),
-                .copy("Resource/emojis9.1.json"),
-                .copy("Resource/emojis11.0.1.json"),
+                .process("Resource/"),
+                .process("Storyboard/"),
+                .process("Engine/Utility/EmojiPreviewer.xib"),
+                .process("View/EmojiPopover/"),
             ]
         )
     ]
